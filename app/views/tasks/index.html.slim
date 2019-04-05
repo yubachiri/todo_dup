@@ -1,11 +1,24 @@
 h1 Listing tasks
 
+h3 検索
+= search_form_for @q do |f|
+  = f.label :title_cont
+  = f.text_field :title_cont
+  = f.label :status_eq
+  = f.select :status_eq, Task.statuses.keys.to_a
+  = f.label :priority_eq
+  = f.select :priority_eq, Task.priorities.keys.to_a
+  = f.submit
+
+hr
+
 table
   thead
     tr
       th Title
       th Deadline
       th Status
+      th Priority
       th
       th
       th
@@ -16,6 +29,7 @@ table
         td = task.title
         td = task.deadline
         td = task.status
+        td = task.priority
         td = link_to 'Show', task
         td = link_to 'Edit', edit_task_path(task)
         td = link_to 'Destroy', task, data: { confirm: 'Are you sure?' }, method: :delete

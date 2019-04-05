@@ -9,6 +9,9 @@ p
 p
   strong Status:
   = @task.status
+p
+  strong Priority:
+  = @task.priority
 
 => link_to 'Edit', edit_task_path(@task)
 '|

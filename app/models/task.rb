@@ -6,4 +6,10 @@ class Task < ApplicationRecord
     started: 1,
     completed: 2
   }
+
+  enum priority: {
+    top: 0,
+    next: 1,
+    other: 2
+  }
 end

@@ -15,4 +15,7 @@
   .field
     = f.label :status
     = f.select :status, Task.statuses.keys.to_a
+  .field
+    = f.label :priority
+    = f.select :priority, Task.priorities.keys.to_a
   .actions = f.submit

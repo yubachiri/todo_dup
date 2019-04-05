@@ -3,14 +3,15 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result
   end
 
   def show
   end
 
   def new
-    @task = Task.new
+    @task = current_user.tasks.new
   end
 
   def edit
