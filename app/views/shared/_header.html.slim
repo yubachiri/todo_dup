@@ -7,3 +7,4 @@
     = link_to '新規登録', new_user_registration_path
   - else
     a ログイン中
+    = link_to 'ログアウト', destroy_user_session_path, method: :delete
