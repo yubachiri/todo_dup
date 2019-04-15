@@ -24,6 +24,10 @@ gem 'ransack'
 # データ投入
 gem 'seed-fu'
 
+# graphql
+gem 'graphql', '1.9.4'
+gem 'graphiql-rails'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
@@ -45,3 +49,5 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'graphiql-rails', group: :development
