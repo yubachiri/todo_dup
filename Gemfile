@@ -15,6 +15,7 @@ gem 'kaminari'
 gem 'rails-i18n'
 gem 'coffee-rails'
 gem "jquery-rails"
+gem 'webpacker'
 
 # ログイン
 gem 'devise'

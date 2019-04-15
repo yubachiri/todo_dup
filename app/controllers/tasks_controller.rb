@@ -7,6 +7,11 @@ class TasksController < ApplicationController
     @tasks = @q.result
   end
 
+  def graph_index
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result
+  end
+
   def show
   end
 
