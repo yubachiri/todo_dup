@@ -1,3 +1,12 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  $('#first-task-button').on 'click', ->
+    query = {query: '{firstTask {id title status priority}}'};
+    $.ajax
+      url: '/graphql',
+      type: 'POST',
+      dataType: 'json',
+      data: query
+    .done (result) ->
+      console.log(result)
+    .fail (error) ->
+      console.log(error)

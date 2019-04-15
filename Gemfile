@@ -14,6 +14,7 @@ gem 'html2slim'
 gem 'kaminari'
 gem 'rails-i18n'
 gem 'coffee-rails'
+gem "jquery-rails"
 
 # ログイン
 gem 'devise'
