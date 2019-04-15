@@ -42,7 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(function (result) {
           self.allTask = result.data.allTask;
         })
-        .catch(error => console.log(error));
+        .catch(function (error) {
+          console.log(error);
+        });
     },
     data: {
       allTask: [],
