@@ -1,25 +1,24 @@
 import Vue from 'vue/dist/vue.esm.js'
-import ApolloClient from "apollo-client"
-import {HttpLink} from 'apollo-link-http'
-import {InMemoryCache} from 'apollo-cache-inmemory';
-import {ApolloLink, concat} from 'apollo-link';
-import gql from 'graphql-tag'
+import ApolloClient from "apollo-boost";
+import VueApollo from "vue-apollo";
+import { gql } from "apollo-boost";
 
-const httpLink = new HttpLink({uri: "http://localhost:3008/graphql"});
-
-const authMiddleware = new ApolloLink((operation, forward) => {
-  operation.setContext({
-    headers: {
-      'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').getAttribute('content'),
-    },
-  });
-  return forward(operation);
+const client = new ApolloClient({
+  uri: "http://localhost:3008/graphql",
+  request: async operation => {
+    operation.setContext({
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').getAttribute('content'),
+      },
+    });
+  }
 });
 
-const apolloClient = new ApolloClient({
-  link: concat(authMiddleware, httpLink),
-  cache: new InMemoryCache(),
+const apolloProvider = new VueApollo({
+  defaultClient: client
 });
+
+Vue.use(VueApollo);
 
 document.addEventListener('DOMContentLoaded', () => {
   const ALL_TASK_QUERY = gql`
@@ -44,9 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const app = new Vue({
     el: '#mount_target',
+    apolloProvider: apolloProvider,
     mounted() {
       self = this;
-      apolloClient.query({
+      this.$apollo.query({
         query: ALL_TASK_QUERY
       })
         .then(function (result) {
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     methods: {
       search: function (e) {
         if(e.target.value == null) return
-        apolloClient.query({
+        this.$apollo.query({
           query: SEARCH_TASK_QUERY,
           variables: {
             taskName: e.target.value
