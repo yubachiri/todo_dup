@@ -1,7 +1,11 @@
 = javascript_pack_tag 'vue_apollo_sample'
 
+= link_to '-> normal', tasks_path
+br
+br
+
 #mount_target
-  b title:
+  b search:
   input[type="text" @input="search"]
   div[v-for="task in tasks" :key="task.id"]
     = "{{task.title}}"
