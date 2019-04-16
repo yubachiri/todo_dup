@@ -2,8 +2,8 @@ module Types
   class QueryType < Types::BaseObject
     field :all_task, [TaskType], null: false, description: "return all task"
     field :first_task, TaskType, null: false, description: "return first task"
-    field :task_find_by, TaskType, null: false, description: "return a task" do
-      argument :task_id, Integer, required: true
+    field :task_search_by, [TaskType], null: false, description: "return a task" do
+      argument :task_name, String, required: true
     end
     field :resolver_method_exam, String, null: false, description: "this is resolver sample", resolver_method: :say_hello
 
@@ -15,8 +15,8 @@ module Types
       Task.first
     end
 
-    def task_find_by(task_id:)
-      Task.find_by(id: task_id)
+    def task_search_by(task_name:)
+      Task.where('title like ?', "%#{task_name}%")
     end
 
     def say_hello

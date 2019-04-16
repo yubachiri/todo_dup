@@ -22,7 +22,7 @@ const apolloClient = new ApolloClient({
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const TASK_QUERY = gql`
+  const ALL_TASK_QUERY = gql`
   query allTask{
     allTask {
       id
@@ -32,22 +32,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }`
 
+  const SEARCH_TASK_QUERY = gql`
+  query taskSearchBy($taskName: String!){
+    taskSearchBy(taskName: $taskName) {
+      id
+      title
+      status
+      priority
+    }
+  }`
+
   const app = new Vue({
     el: '#mount_target',
-    async mounted() {
+    mounted() {
       self = this;
       apolloClient.query({
-        query: TASK_QUERY
+        query: ALL_TASK_QUERY
       })
         .then(function (result) {
-          self.allTask = result.data.allTask;
+          self.tasks = result.data.allTask;
         })
         .catch(function (error) {
           console.log(error);
         });
     },
     data: {
-      allTask: [],
+      tasks: [],
+    },
+    methods: {
+      search: function (e) {
+        if(e.target.value == null) return
+        apolloClient.query({
+          query: SEARCH_TASK_QUERY,
+          variables: {
+            taskName: e.target.value
+          }
+        })
+          .then(function (result) {
+            self.tasks = result.data.taskSearchBy;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     }
   })
 })

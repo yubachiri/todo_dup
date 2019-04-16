@@ -1,0 +1,35 @@
+type Mutation {
+  """
+  An example field added by the generator
+  """
+  testField: String!
+}
+
+type Query {
+  """
+  return all task
+  """
+  allTask: [Task!]!
+
+  """
+  return first task
+  """
+  firstTask: Task!
+
+  """
+  this is resolver sample
+  """
+  resolverMethodExam: String!
+
+  """
+  return a task
+  """
+  taskSearchBy(taskName: String!): [Task!]!
+}
+
+type Task {
+  id: ID!
+  priority: Int!
+  status: Int!
+  title: String!
+}
