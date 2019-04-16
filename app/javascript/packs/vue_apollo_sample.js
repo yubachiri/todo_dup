@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     methods: {
       search: function (e) {
-        if(e.target.value == null) return
         this.$apollo.query({
           query: SEARCH_TASK_QUERY,
           variables: {
