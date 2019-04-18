@@ -24,13 +24,13 @@ default: &default
 
 development:
   <<: *default
-  database: todo_development
+  database: todo_dup_development
 
 test:
   <<: *default
-  database: todo_test
+  database: todo_dup_test
 
 production:
   <<: *default
-  database: todo_production
-  username: todo
+  database: todo_dup_production
+  username: todo_dup

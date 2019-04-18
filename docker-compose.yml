@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile.development
     command: bash -c 'rm -f tmp/pids/server.pid && rails s -b 0.0.0.0'
     volumes:
-      - .:/todo
+      - .:/todo_dup
       - bundle:/usr/local/bundle
     depends_on:
       - db
@@ -16,7 +16,7 @@ services:
       - db
     environment:
       DB_USER: postgres
-      DB_NAME: todo
+      DB_NAME: todo_dup
       DB_PASSWORD: password
       DB_HOST: db
     tty: true
