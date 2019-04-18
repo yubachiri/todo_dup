@@ -2,7 +2,7 @@ FROM ruby:2.5.1
 ENV LANG C.UTF-8
 ENV TZ='Asia/Tokyo'
 
-ENV APP_HOME /todo
+ENV APP_HOME /todo_dup
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
